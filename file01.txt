@@ -1,3 +1,0 @@
-hello file01~~
-count=102
-
