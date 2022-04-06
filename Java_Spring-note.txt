@@ -1,0 +1,70 @@
+Part Three of Spring
+
+第一章：初识Spring
+
+1  Spring项目步骤
+	① 导入坐标：
+		
+		<!--spring坐标-->
+		<dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-context</artifactId>
+		  <version>5.0.5.RELEASE</version>
+		</dependency>
+		
+	② 创建Bean：
+		<bean id="userDao" class="com.landongzoom.dao.impl.UserDaoImpl"></bean>
+		
+	③ 创建applicationContext.xml，并且进行配置
+	
+	④ 创建ApplicationContext对象getBean
+	
+	
+2 Spring重点配置标签
+	<bean>标签
+		id属性:在容器中Bean实例的唯一标识，不允许重复
+		class属性:要实例化的Bean的全限定名
+		scope属性:Bean的作用范围，常用是Singleton(默认)和prototype
+		<property>标签：属性注入，配置Spring容器调用set方法进行注入
+			name属性：属性名称
+			value属性：注入的普通属性值
+			ref属性：注入的对象引用值
+			<list>标签
+			<map>标签
+			<properties>标签
+		<constructor-arg>标签:配置Spring容器调用有参构造时进行注入。
+			细节：<constructor-arg>的属性、子标签与<property>标签相同。	
+	<import>标签:导入其他的Spring的分文件
+	
+	
+3 API
+	3.1 ApplicationContext的实现类
+		1） ClassPathXmlApplicationContext
+		它是从类的根路径下加载配置文件 推荐使用这种
+		2） FileSystemXmlApplicationContext
+		它是从磁盘路径上加载配置文件，配置文件可以在磁盘的任意位置。
+		3） AnnotationConfigApplicationContext
+		当使用注解配置容器对象时，需要使用此类来创建 spring 容器。它用来读取注解。	
+	
+	3.2 getBean()方法
+		// 根据Bean的id从容器中获得Bean实例
+		public Object getBean(String name) throws BeansException {
+			assertBeanFactoryActive();
+			return getBeanFactory().getBean(name);
+		}
+		
+		// 根据类型从容器中匹配Bean实例
+		public <T> T getBean(Class<T> requiredType) throws BeansException {
+			assertBeanFactoryActive();
+			return getBeanFactory().getBean(requiredType);
+		}
+		
+		注意：其中，当参数的数据类型是字符串时，表示根据Bean的id从容器中获得Bean实例，
+		返回是Object，需要强转。当参数的数据类型是Class类型时，表示根据类型从容器中匹
+		配Bean实例，当容器中相同类型的Bean有多个时，则此方法会报错。
+	
+	3.3 Spring重点API
+		ApplicationContext app = new ClasspathXmlApplicationContext("xml文件");
+		app.getBean("id");
+		app.getBean(Class);
+		
