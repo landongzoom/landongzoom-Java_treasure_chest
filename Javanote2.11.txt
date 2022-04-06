@@ -370,7 +370,7 @@ First Two Parts of JavaSE and JavaWeb
 
 			- el ： 用来指定哪儿些标签受 Vue 管理。 该属性取值 #app 中的 app 需要是受管理的标签的id属性值
 			- data ：用来定义数据模型
-			- methods ：用来定义函数。这个我们在后面就会用到
+			- methods ：用来定义函数。
 			
 			
 
