@@ -126,8 +126,8 @@ Part Three of Spring
 		==================================================================================
 	    @Configuration 	用于指定当前类是一个 Spring 配置类，当创建容器时会从该类上加载注解
 		----------------------------------------------------------------------------------
-						用于指定 Spring 在初始化容器时要扫描的包。
-		@ComponentScan  作用和在 Spring 的 xml 配置文件中的
+		@ComponentScan	用于指定 Spring 在初始化容器时要扫描的包。
+						 作用和在 Spring 的 xml 配置文件中的
 						<context:component-scan base-package="com.itheima"/>一样
 		----------------------------------------------------------------------------------	
 		@Bean 			使用在方法上，标注将该方法的返回值存储到 Spring 容器中
@@ -158,3 +158,50 @@ Part Three of Spring
 		③ 使用@ContextConfiguration指定配置文件或配置类
 		④ 使用@Autowired注入需要测试的对象
 		⑤ 创建测试方法进行测试
+		
+第三章 SpringMVC
+
+一 Spring集成web环境
+1 servlet jsp坐标
+	<dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.2.1</version>
+      <scope>provided</scope>
+    </dependency>
+	
+2 Spring提供获取应用上下文的工具
+	① 在web.xml中配置ContextLoaderListener监听器（导入spring-web坐标）
+	
+		<dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-web</artifactId>
+		  <version>5.0.5.RELEASE</version>
+		</dependency>
+		
+		<!--全局参数-->
+		<context-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:applicationContext.xml</param-value>
+		</context-param>
+		<!--Spring的监听器-->
+		<listener>
+			<listener-class>
+				org.springframework.web.context.ContextLoaderListener
+			</listener-class>
+		</listener>
+		
+	② 使用WebApplicationContextUtils获得应用上下文对象ApplicationContext
+		ApplicationContext applicationContext =
+		WebApplicationContextUtils.getWebApplicationContext(servletContext);
+		Object obj = applicationContext.getBean("id");
+		
+二 SpringMVC
+			 
