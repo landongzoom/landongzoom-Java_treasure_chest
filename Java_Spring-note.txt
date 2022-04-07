@@ -68,3 +68,93 @@ Part Three of Spring
 		app.getBean("id");
 		app.getBean(Class);
 		
+
+		
+第二章
+		
+1 数据源
+	1.1	数据源的开发步骤
+		① 导入数据源的坐标和数据库驱动坐标
+		
+			<!--C3P0连接池-->
+			<dependency>
+			  <groupId>c3p0</groupId>
+			  <artifactId>c3p0</artifactId>
+			  <version>0.9.1.2</version>
+			</dependency>
+			
+			<!--mysql数据库-->
+			<dependency>
+			  <groupId>mysql</groupId>
+			  <artifactId>mysql-connector-java</artifactId>
+			  <version>5.1.32</version>
+			</dependency>
+			
+			<!-- Druid连接池 -->
+			<dependency>
+			  <groupId>com.alibaba</groupId>
+			  <artifactId>druid</artifactId>
+			  <version>1.1.10</version>
+			</dependency>
+			
+		② 创建数据源对象
+		③ 设置数据源的基本连接数据
+		④ 使用数据源获取连接资源和归还连接资源
+		
+2 注解开发
+	2.1 原始注解			
+		================================================================
+		@Component 		使用在类上用于实例化Bean
+		----------------------------------------------------------------
+		@Controller 	使用在web层类上用于实例化Bean
+		@Service 		使用在service层类上用于实例化Bean
+		@Repository 	使用在dao层类上用于实例化Bean
+		----------------------------------------------------------------
+		@Autowired		使用在字段上用于根据类型依赖注入
+		@Qualifier 		结合@Autowired一起使用用于根据名称进行依赖注入
+		@Resource 		相当于@Autowired+@Qualifier，按照名称进行注入
+		----------------------------------------------------------------
+		@Value	 		注入普通属性
+		@Scope 			标注Bean的作用范围
+		================================================================
+		（非重点）
+		@PostConstruct 	使用在方法上标注该方法是Bean的初始化方法
+		@PreDestroy 	使用在方法上标注该方法是Bean的销毁方法	
+		================================================================
+	
+	2.2 新注解
+		==================================================================================
+	    @Configuration 	用于指定当前类是一个 Spring 配置类，当创建容器时会从该类上加载注解
+		----------------------------------------------------------------------------------
+						用于指定 Spring 在初始化容器时要扫描的包。
+		@ComponentScan  作用和在 Spring 的 xml 配置文件中的
+						<context:component-scan base-package="com.itheima"/>一样
+		----------------------------------------------------------------------------------	
+		@Bean 			使用在方法上，标注将该方法的返回值存储到 Spring 容器中
+		----------------------------------------------------------------------------------
+		@PropertySource 用于加载.properties 文件中的配置
+		----------------------------------------------------------------------------------
+		@Import 		用于导入其他配置类
+		==================================================================================
+	
+	2.3 Spring集成Junit
+		<!--此处需要注意的是， spring5 及以上版本要求 junit 的版本必须是 4.12 及以上-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>5.0.2.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		
+		步骤：
+		① 导入spring集成Junit的坐标
+		② 使用@Runwith注解替换原来的运行期
+		③ 使用@ContextConfiguration指定配置文件或配置类
+		④ 使用@Autowired注入需要测试的对象
+		⑤ 创建测试方法进行测试
