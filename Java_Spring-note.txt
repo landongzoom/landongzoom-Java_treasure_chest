@@ -142,7 +142,7 @@ Part Three of Spring
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>5.0.2.RELEASE</version>
+			<version>5.0.5.RELEASE</version>
 		</dependency>
 		
 		<dependency>
@@ -159,7 +159,9 @@ Part Three of Spring
 		④ 使用@Autowired注入需要测试的对象
 		⑤ 创建测试方法进行测试
 		
-第三章 SpringMVC
+		
+		
+第三章 SpringMVC快速入门
 
 一 Spring集成web环境
 1 servlet jsp坐标
@@ -203,5 +205,84 @@ Part Three of Spring
 		WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		Object obj = applicationContext.getBean("id");
 		
-二 SpringMVC
-			 
+4 SpringMVC
+	4.1 坐标
+	① 导入Servlet和Jsp的坐标
+		<!--Spring坐标-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.0.5.RELEASE</version>
+		</dependency>
+		<!--SpringMVC坐标-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>5.0.5.RELEASE</version>
+		</dependency>
+		
+		<!--Servlet坐标-->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<!--Jsp坐标-->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+	② 在web.xml配置SpringMVC的核心控制器
+		<servlet>
+			<servlet-name>DispatcherServlet</servlet-name>
+			<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<init-param>
+				<param-name>contextConfigLocation</param-name>
+				<param-value>classpath:spring-mvc.xml</param-value>
+			</init-param>
+			<load-on-startup>1</load-on-startup>
+		</servlet>
+		<servlet-mapping>
+			<servlet-name>DispatcherServlet</servlet-name>
+			<url-pattern>/</url-pattern>
+		</servlet-mapping>
+		
+	4.2 SpringMVC的相关组件
+		• 前端控制器： DispatcherServlet
+		• 处理器映射器： HandlerMapping
+		• 处理器适配器： HandlerAdapter
+		• 处理器： Handler
+		• 视图解析器： View Resolver
+		• 视图： View	
+		
+	4.3 SpringMVC的注解和配置
+		• 请求映射注解： @RequestMapping
+		• 视图解析器配置：
+			REDIRECT_URL_PREFIX = "redirect:"
+			FORWARD_URL_PREFIX = "forward:"
+			prefix = "";
+			suffix = "";	
+			
+			
+			
+第四章 SpringMVC的请求和响应
+	1. json 坐标
+	<dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.9.0</version>
+    </dependency>
